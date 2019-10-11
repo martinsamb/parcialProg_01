@@ -2,18 +2,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "utn.h"
-#include "fantasma.h"  //cambiar por nombre entidad
+#include "pedidos.h"
+#include "clientes.h"
+#include "residuos.h"
 
 
-#define QTY_TIPO 3
+#define QTY_CLIENTE 100
+#define QTY_PEDIDO 1000
+#define QTY_RESIDUO 1000
 
 int main()
 {
     int opcion;
-    int contadorIdfantasma=0;                   //cambiar
+    int contadorIdCliente=0;                   //cambiar
 
-    Fantasma arrayFantasma[QTY_TIPO];                   //cambiar
-    fantasma_Inicializar(arrayFantasma,QTY_TIPO);                   //cambiar
+    Cliente arrayCliente[QTY_CLIENTE];                   //cambiar
+    cliente_Inicializar(arrayCliente,QTY_CLIENTE);                   //cambiar
+
+    int contadorIdPedido=0;                   //cambiar
+
+    Pedido arrayPedido[QTY_PEDIDO];                   //cambiar
+    pedido_Inicializar(arrayPedido,QTY_PEDIDO);
+
+        int contadorIdResiduo=0;                   //cambiar
+
+    Residuo arrayResiduo[QTY_RESIDUO];                   //cambiar
+    residuo_Inicializar(arrayResiduo,QTY_RESIDUO);
 
     do
     {
@@ -22,31 +36,43 @@ int main()
         switch(opcion)
         {
             case 1: //Alta
-                fantasma_alta(arrayFantasma,QTY_TIPO,&contadorIdfantasma);                   //cambiar
+                cliente_alta(arrayCliente,QTY_CLIENTE,&contadorIdCliente);                   //cambiar
                 break;
 
             case 2: //Modificar
-                fantasma_modificar(arrayFantasma,QTY_TIPO);                   //cambiar
+                cliente_modificar(arrayCliente,QTY_CLIENTE);                   //cambiar
                 break;
 
             case 3: //Baja
-                fantasma_baja(arrayFantasma,QTY_TIPO);                   //cambiar
+                cliente_baja(arrayCliente,QTY_CLIENTE);                   //cambiar
                 break;
 
             case 4://Listar
-                fantasma_listar(arrayFantasma,QTY_TIPO);                   //cambiar
+                pedido_alta(arrayPedido,QTY_PEDIDO);                   //cambiar
                 break;
 
             case 5://Ordenar
-                fantasma_ordenarPorString(arrayFantasma,QTY_TIPO);                   //cambiar
+                residuo_alta(arrayResiduo,QTY_RESIDUO);                   //cambiar
                 break;
 
-            case 6://Salir
+            case 6://Imprimir Clientes
+                cliente_listar(arrayCliente,QTY_CLIENTE);                   //cambiar
+                break;
+
+            case 7://Imprimir pedidos pendientes
+                pedido_listarPen(arrayPedido,QTY_PEDIDO);                   //cambiar
+                break;
+
+            case 8://Imprimir Pedidos Procesados
+                pedido_listarPro(arrayResiduo,QTY_RESIDUO);                   //cambiar
+                break;
+
+            case 9://Salir
                 break;
             default:
                 printf("\nOpcion no valida");
         }
     }
-    while(opcion!=6);
+    while(opcion!=9);
     return 0;
 }

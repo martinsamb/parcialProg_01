@@ -18,6 +18,12 @@ int isValidTelephone(char* stringRecibido);
 int utn_getDNI(char* msg, char* msgError, int minSize, int maxSize, int reintentos, char* input);
 int isValidDNI(char* stringRecibido);
 
+int utn_getDomicilio(char* msg, char* msgError, int minSize, int maxSize, int reintentos, char* input);
+int isValidDomicilio(char* stringRecibido);
+
+int utn_getDate(char* msg, char* msgError, int reintentos, char* input);
+int isValidDate(char* stringRecibido);
+
 int utn_getCUIT(char* msg, char* msgError, int reintentos, char* input);
 int isValidCUIT(char* stringRecibido);
 

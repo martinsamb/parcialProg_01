@@ -577,3 +577,144 @@ int isValidChar(char charRecibido)
         retorno=0;
     return retorno;
 }
+
+//*************************************************************
+int utn_getDomicilio(char* msg, char* msgError, int minSize, int maxSize, int reintentos, char* input)
+{
+    int retorno=-1;
+    char bufferStr[maxSize];
+
+    if(msg!=NULL && msgError!=NULL && minSize<maxSize && reintentos>=0 && input!=NULL)
+    {
+        do
+        {
+            if(!getString(msg,msgError,minSize,maxSize,&reintentos,bufferStr)) //==0 sin errores !0
+            {
+                if(isValidDomicilio(bufferStr)==1)
+                {
+                    strncpy(input,bufferStr,maxSize);
+                    retorno=0;
+                    break;
+                }
+                else
+                {
+                    printf("%s 2",msgError);
+                    reintentos--;
+                }
+            }
+        }
+        while(reintentos>=0);
+    }
+    return retorno;
+}
+
+int isValidDomicilio(char* stringRecibido)
+{
+    int retorno=1;  // para las funciones isValid arranco con verdadero y cambio cuando encuentro un error
+    int i;
+    for(i=0;stringRecibido[i]!='\0';i++)
+    {
+        if(stringRecibido[i]<'0' || (stringRecibido[i]>'9' && stringRecibido[i]<'A') || (stringRecibido[i]>'Z' && stringRecibido[i]<'a') || stringRecibido[i]>'z' )
+        {
+            retorno=0;
+            break;
+        }
+    }
+    return retorno;
+}
+
+//***************************************
+/** \brief Solicita el ingreso de una fecha en formato dd/mm/yyyy y valida su tamaño y su contenido
+* \param msg char* Mensaje a mostrar al solicitar el string
+* \param msgError char* Mensaje de error a mostrar
+* \param reintentos int* Puntero a la cantidad de reintentos para ingresar el string solicitado
+* \param input char* Puntero a la variable donde se almacena el string ingresado
+* \return int Return (-1) si Error [tamaño o contenido invalido o NULL pointer] - (0) si Ok
+*/
+int utn_getDate(char* msg, char* msgError, int reintentos, char* input)
+{
+    int maxSize=11;
+    int minSize=10;
+    int retorno=-1;
+    char bufferStr[maxSize];
+
+    if(msg!=NULL && msgError!=NULL && minSize<maxSize && reintentos>=0 && input!=NULL)
+    {
+        do
+        {
+            if(!getString(msg,msgError,minSize,maxSize,&reintentos,bufferStr)) //==0 sin errores !0
+            {
+                if(isValidDate(bufferStr)==1)
+                {
+                    strncpy(input,bufferStr,maxSize);
+                    retorno=0;
+                    break;
+                }
+                else
+                {
+                    printf("%s 2",msgError);
+                    reintentos--;
+                }
+            }
+        }
+        while(reintentos>=0);
+    }
+    return retorno;
+}
+
+int isValidDate(char* stringRecibido)
+{
+    int retorno=1;  // para las funciones isValid arranco con verdadero y cambio cuando encuentro un error
+    int i;
+    char buffer[4];
+    int contador=0;
+    int day;
+    int month;
+    int year;
+
+    for(i=0;stringRecibido[i]!='\0';i++)
+    {
+        if((stringRecibido[i]<'0' || stringRecibido[i]>'9') && (stringRecibido[i]!='/')) // chequeo que solo sean numeros o /
+        {
+            retorno=0;
+            break;
+        }
+
+        if(stringRecibido[i]=='/')
+        {
+            contador++;
+        }
+    }
+    if(contador!=2)
+        retorno=0;
+
+    if(retorno==0)
+        printf("\nError de formato ");
+    else
+    {
+        for(i=0;i<2;i++)
+            strcpy(&buffer[i],&stringRecibido[i]);
+
+        day=atoi(buffer);
+
+        for(i=3;i<5;i++)
+            strcpy(&buffer[i-3],&stringRecibido[i]);
+
+        month=atoi(buffer);
+
+        for(i=6;i<10;i++)
+            strcpy(&buffer[i-6],&stringRecibido[i]);
+
+        year=atoi(buffer);
+
+        if(day>31 || day<1 || month>12 || month<1 || year<1900 || year >2100)
+            retorno=0;
+        else if((month==4 || month==6 || month==9 || month==11) && day>30)
+            retorno=0;
+        else if(month==2 && day>29)
+            retorno=0;
+    }
+
+    return retorno;
+}
+
