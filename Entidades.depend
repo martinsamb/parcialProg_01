@@ -156,3 +156,38 @@
 	<string.h>
 	"utn.h"
 
+1570765819 source:c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\parcialprog_01-master\fantasma.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"fantasma.h"
+
+1570765819 c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\parcialprog_01-master\utn.h
+
+1570765819 c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\parcialprog_01-master\fantasma.h
+
+1570765819 source:c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\parcialprog_01-master\informes.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"fantasma.h"
+
+1570765819 source:c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\parcialprog_01-master\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1570765820 source:c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\fantasma.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"fantasma.h"
+
+1570765820 c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\utn.h
+
+1570765820 c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\fantasma.h
+

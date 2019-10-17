@@ -1,6 +1,8 @@
 #ifndef CLIENTES_H_INCLUDED
 #define CLIENTES_H_INCLUDED
 
+#define TEXT_CLIENT 100
+#define TEXT_NAME 70
 #define TEXT_SIZE 20
 
 typedef struct
@@ -8,28 +10,28 @@ typedef struct
     int idUnico;
     int isEmpty;
     //-----------------
-    char nombre[TEXT_SIZE];
-    int cuit;
-    char direccion[TEXT_SIZE];
-    char localidad[TEXT_SIZE];
-    int cantidadKg;
+    char nombreEmpresa[TEXT_CLIENT];
+    int cuit[TEXT_SIZE];
+    char direccion[TEXT_NAME];
+    char localidad[TEXT_NAME];
 
 }Cliente;
 
 
 
 
-int fantasma_Inicializar(Fantasma array[], int size);                                    //cambiar fantasma
-int fantasma_buscarEmpty(Fantasma array[], int size, int* posicion);                    //cambiar fantasma
-int fantasma_buscarID(Fantasma array[], int size, int valorBuscado, int* posicion);                    //cambiar fantasma
-int fantasma_buscarInt(Fantasma array[], int size, int valorBuscado, int* posicion);                    //cambiar fantasma
-int fantasma_buscarString(Fantasma array[], int size, char* valorBuscado, int* indice);                    //cambiar fantasma
-int fantasma_alta(Fantasma array[], int size, int* contadorID);                          //cambiar fantasma
-int fantasma_baja(Fantasma array[], int sizeArray);                                      //cambiar fantasma
-int fantasma_bajaValorRepetidoInt(Fantasma array[], int sizeArray, int valorBuscado);
-int fantasma_modificar(Fantasma array[], int sizeArray);                                //cambiar fantasma
-int fantasma_ordenarPorString(Fantasma array[],int size);                              //cambiar fantasma
-int fantasma_listar(Fantasma array[], int size);                      //cambiar fantasma
+int cliente_Inicializar(Cliente array[], int size);                                    //cambiar cliente
+int cliente_buscarEmpty(Cliente array[], int size, int* posicion);                    //cambiar cliente
+int cliente_buscarById(Cliente array[], int id, int size);                    //cambiar cliente
+//int cliente_buscarInt(Cliente array[], int size, int valorBuscado, int* posicion);                    //cambiar cliente
+//int cliente_buscarString(Cliente array[], int size, char* valorBuscado, int* indice);                    //cambiar cliente
+int cliente_alta(Cliente array[], int size, int* contadorID);                          //cambiar cliente
+int cliente_baja(Cliente array[], int sizeArray);                                      //cambiar cliente
+//int cliente_bajaValorRepetidoInt(Cliente array[], int sizeArray, int valorBuscado);
+int cliente_modificar(Cliente array[], int sizeArray);                                //cambiar cliente
+//int cliente_ordenarPorString(Cliente array[],int size);                              //cambiar cliente
+int cliente_listar(Cliente array[], int size);                      //cambiar cliente
+int cliente_print(Cliente array[], int posicion,int size);
 
 
 
