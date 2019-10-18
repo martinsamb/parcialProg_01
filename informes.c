@@ -13,22 +13,23 @@
 * \return int Return (-1) si Error [Invalid length or NULL pointer] - (0) Ok
 *
 */
-int Informes_listarPorCriterio(Fantasma arrayA[], Fantasma arrayB[], int sizeI, int sizeJ, char* criterio)  //Valores de dos arrays. Si es valor repetido se vuelve a imprimir
+/*
+int cliente_listarPorCriterio(Pedido arrayP[], Cliente arrayC[], int sizeP, int sizeC, char* criterio)  //Valores de dos arrays. Si es valor repetido se vuelve a imprimir
 {
     int retorno=-1;
     int i;
     int j;
-    if(arrayA!=NULL && sizeI>=0 && arrayB!=NULL && sizeJ>=0 && criterio!=NULL)
+    if(arrayC!=NULL && sizeC>=0 && arrayP!=NULL && sizeP>=0 && criterio!=NULL)
     {
-        for(i=0;i<sizeI;i++)                                                                            //Obtengo la posicion de la primer entidad
+        for(i=0;i<sizeP;i++)                                                                            //Obtengo la posicion de la primer entidad
         {
-            if(arrayA[i].isEmpty==1)                 //cambiar campo donde busco el criterio
+            if(arrayP[i].isEmpty==1)                 //cambiar campo donde busco el criterio
                 continue;                                                                       //si esta vacio o no tiene el criterio > continue
-            if(strcmp(arrayA[i].varString,criterio)==0)
+            if(strcmp(arrayP[i].estado,criterio)==0)
             {
-                fantasma_buscarID(arrayB,sizeJ,arrayA[i].idUnico,&j);                            //Obtengo la posicion de la 2da entidad buscando por el campo en comun
+                pedido_buscarById()_buscarID(arrayP,sizeJ,arrayP[i].idUnico,&j);                            //Obtengo la posicion de la 2da entidad buscando por el campo en comun
                 printf("\nID A: %d\nID B: %d",
-                       arrayA[i].idUnico,arrayB[j].idUnico);
+                       arrayP[i].idUnico,arrayC[j].idUnico);
             }
 
         }
@@ -36,7 +37,7 @@ int Informes_listarPorCriterio(Fantasma arrayA[], Fantasma arrayB[], int sizeI, 
     }
     return retorno;
 }
-
+*/
 /** \brief Busca un valor repetido y lo lista una sola vez, junto con otros elementos de dos arrays vinculados
 * \param arrayA Fantasma Array de Fantasma
 * \param arrayB Fantasma Array de Fantasma
@@ -46,7 +47,7 @@ int Informes_listarPorCriterio(Fantasma arrayA[], Fantasma arrayB[], int sizeI, 
 *
 */
 //Lista un campo que se repite, lo imprime una sola vez y calcula contador y acumulado
-int Informes_listarCriterioContadorAcumulado(Fantasma arrayA[], Fantasma arrayB[], int sizeI, int sizeJ)         //cambiar Fantasma
+int cliente_masPedidosPendientes(Pedido arrayP[], Cliente arrayC[], int sizeC, int sizeJ)         //cambiar Fantasma
 {
     int retorno=-1;
     int i;
@@ -56,27 +57,27 @@ int Informes_listarCriterioContadorAcumulado(Fantasma arrayA[], Fantasma arrayB[
     int contador=0;
     int acumulado=0;
 
-    if(arrayA!=NULL && sizeI>=0 && arrayB!=NULL && sizeJ>=0)
+    if(arrayP!=NULL && sizeP>=0 && arrayC!=NULL && sizeC>=0)
     {
-        for(i=0;i<sizeI;i++)
+        for(i=0;i<sizeP;i++)
         {
-            fantasma_buscarString(arrayA,i,arrayA[i].varString,&auxPosicion);                  //cambiar nombreFuncion y campo      va a analizar hasta <i
-            if(arrayA[i].isEmpty==1 && auxPosicion!=-1)
+            pedido_buscarString(arrayP,i,arrayP[i].estado,&auxPosicion);                  //cambiar nombreFuncion y campo      va a analizar hasta <i
+            if(arrayP[i].isEmpty==1 && auxPosicion!=-1)
                 continue;                                                                 //Si ese valor ya aparecio > continue
             else
             {
-                printf("\nCampo: %s",arrayA[i].varString);                                   //Imprimo el valor que voy a listar
-                for(k=i,contador=0,acumulado=0;k<sizeI;k++)                                                            //Recorro por segunda vez el mismo array
+                printf("\nEstado: %s",arrayP[i].estado);                                   //Imprimo el valor que voy a listar
+                for(k=i,contador=0,acumulado=0;k<sizeP;k++)                                                            //Recorro por segunda vez el mismo array
                 {
-                    if(arrayA[k].isEmpty!=1 && strcmp(arrayA[k].varString,arrayA[i].varString)==0)     //Busco todas las veces que aparece ese cuit
+                    if(arrayC[k].isEmpty!=1 && strcmp(arrayC[k].idUnico,arrayP[i].estado)==0)     //Busco todas las veces que aparece ese cuit
                     {
-                        fantasma_buscarID(arrayB,sizeJ,arrayA[k].idUnico,&j);                 //cambiar Fantasma, busco por el campo en comun
+                        pedido_buscarById(arrayC,sizeC,arrayP[k].idUnico,&j);                 //cambiar Fantasma, busco por el campo en comun
 
                         contador++;
-                        acumulado+=(arrayA[k].varInt*arrayB[j].varInt);
+                        acumulado+=(arrayP[k].estado*arrayC[j].idUnico);
 
-                        printf("\nID A: %d\nID B: %d",
-                                arrayA[k].idUnico,arrayB[j].idUnico);
+                        printf("\nID Pedido: %d\nID Cliente: %d",
+                                arrayP[k].idUnico,arrayP[j].idUnico);
                     }
                 }
                 printf("\nCantidad: %d \nAcumulado: %d",contador,acumulado);
