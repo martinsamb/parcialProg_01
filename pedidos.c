@@ -290,36 +290,7 @@ void pedido_listarCliente(Pedido* arrayP[], int sizeP, Cliente* arrayC[], int si
     }
 }
 
-void pedido_listaPendientes(Pedido arrayP[],int sizeP, Cliente arrayC[],int sizeC)
-{
-    int i;
 
-    for(i=0;i<sizeP;i++)
-    {
-        if(arrayP[i].isEmpty==0 && arrayP[i].estado==PENDIENTE)
-        {
-            pedido_printPendiente(arrayP,i,sizeP,arrayC,sizeC);
-        }
-    }
-}
-
-int pedido_printPendiente(Pedido arrayP[],int sizeP, int posicion,Cliente arrayC[], int sizeC)
-{
-    int retorno=-1;
-    int indexPendiete;
-
-    indexPendiente = pedido_buscarById(arrayP,arrayP[posicion].estado,sizeP);
-    if(arrayP!=NULL && posicion<sizeP)
-    {
-        printf("%d   %d\n",arrayP[posicion].idUnico,arrayP[posicion].estado);
-        retorno = 0;
-    }
-    else
-    {
-        printf("Error al imprimir los datos del pedido\n");
-    }
-    return retorno;
-}
 
 
 

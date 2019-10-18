@@ -2,8 +2,8 @@
 #define INFORMES_H_INCLUDED
 
 
-int Informes_listarPorCriterio(Tipo arrayA, Tipo arrayB, int sizeI, int sizeJ, char* criterio);
-int Informes_listarCriterioContadorAcumulado(Tipo arrayA, Tipo arrayB, int sizeI, int sizeJ);
+int cliente_masPedidosPendientes(Pedido arrayP[], Cliente arrayC[], int sizeC, int sizeJ);
+int cliente_mas_kilos(Tipo arrayA, Tipo arrayB, int sizeI, int sizeJ);
 int Informes_maxContadorAcumulado(Tipo arrayA, Tipo arrayB, int sizeI, int sizeJ);
 
 

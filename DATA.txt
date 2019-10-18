@@ -30,5 +30,28 @@ ID:9 - ID_C:6 - k_tot: 456 - estado:Pendiente
 
 
 
+a) 2 - datasoft
+b) 1- telefonica
+c) 1 - telefonica
+d) 3 - nestle
+e) 5 - dia
+f) 0 clientes
+g) 1 cliente
+h) 47% - 61% - 29% - 54%
+i) CABA 3 - QUILMES 1 - AVELLANEDA 0 - LANUS 0
+J) 150,75
+k) 
+1  alta 410
+1  baja 190
+1  poli 260
+
+3  alta 500
+3  baja 150
+3  poli 270
+
+5  alta 10
+5  baja 5
+5  poli 3
+
 
  
