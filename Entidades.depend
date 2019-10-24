@@ -187,7 +187,101 @@
 	"utn.h"
 	"fantasma.h"
 
-1570765820 c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\utn.h
+1571810421 c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\utn.h
 
 1570765820 c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\fantasma.h
+
+1571862932 source:c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\clientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"clientes.h"
+
+1571816283 c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\clientes.h
+
+1571863038 source:c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\informes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"utn.h"
+	"clientes.h"
+	"pedidos.h"
+	"informes.h"
+
+1571852620 c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\pedidos.h
+
+1571857773 c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\informes.h
+
+1571862852 source:c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdlib.h>
+	"utn.h"
+	"clientes.h"
+	"pedidos.h"
+	"informes.h"
+
+1571863047 source:c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\pedidos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"pedidos.h"
+
+1571811139 source:c:\users\martinsamb\documents\01_unt_programacion\04_programacion i\1erparcial\1erparcial\parcialprog_01\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1571931933 source:c:\users\maría marta\desktop\martin\utn\parcialuno\parcialprog_01\clientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"clientes.h"
+
+1571810422 c:\users\maría marta\desktop\martin\utn\parcialuno\parcialprog_01\utn.h
+
+1571895718 c:\users\maría marta\desktop\martin\utn\parcialuno\parcialprog_01\clientes.h
+
+1571929290 source:c:\users\maría marta\desktop\martin\utn\parcialuno\parcialprog_01\informes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"utn.h"
+	"clientes.h"
+	"pedidos.h"
+	"informes.h"
+
+1571852622 c:\users\maría marta\desktop\martin\utn\parcialuno\parcialprog_01\pedidos.h
+
+1571857774 c:\users\maría marta\desktop\martin\utn\parcialuno\parcialprog_01\informes.h
+
+1571931887 source:c:\users\maría marta\desktop\martin\utn\parcialuno\parcialprog_01\pedidos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"pedidos.h"
+
+1571811140 source:c:\users\maría marta\desktop\martin\utn\parcialuno\parcialprog_01\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1571929816 source:c:\users\maría marta\desktop\martin\utn\parcialuno\parcialprog_01\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"clientes.h"
+	"pedidos.h"
+	"informes.h"
 

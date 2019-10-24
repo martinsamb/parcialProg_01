@@ -1,44 +1,29 @@
-#ifndef PEDIDOS_H_INCLUDED
-#define PEDIDOS_H_INCLUDED
-#include "clientes.h"
+#ifndef PEDIDOS_H_
+#define PEDIDOS_H_
 
-#define PENDIENTE 1
-#define COMPLETADO 2
-
-#define TEXT_SIZE 20
-
-typedef struct
-{
-    int idUnico;
-    int isEmpty;
-    //-----------------
-    int idCliente;
-    int kilos;
-    float hdpe;
-    float ldpe;
-    float pp;
-    int estado;
-
-
-
-
+typedef struct{
+	int kilosRetirados;
+	int kilosHDPE;
+	int kilosLDPE;
+	int kilosPP;
+	int idPedido;
+	int idCliente;
+	int estado;
+	int isEmpty;
 }Pedido;
 
 
+int pedido_Inicializar(Pedido pedidos[], int cantidad);
+int pedido_buscarEmpty(Pedido pedidos[], int cantidad);
+int pedido_alta(Pedido pedidos[],int index, int idPedido, int idCliente);
+int pedido_listarPendientes(Pedido pedidos[], int cantidad);
+int pedido_buscarPorId(Pedido pedidos[], int idPedido,int *pUbicacionPedido);
+int pedido_procesarResiduos(Pedido pedidos[]);
+void pedido_ordenarPorId(Pedido pedidos[], int cantidad);
+void pedido_contadorPendientes(Pedido pedidos[], int idCliente, int* cantidadPendientes);
+void pedido_contadorProcesado(Pedido pedidos[], int idCliente, int* cantidadProcesado);
+void pedido_contador(Pedido pedidos[], int idCliente, int* cantidadProcesado);
+void pedido_contadorKilosProcesados(Pedido pedidos[], int idCliente, int* kilosProcesado);
+int pedido_buscarExistente(Pedido pedidos[], int cantidad, int* idParaAlta);
 
-int pedido_Inicializar(Pedido array[], int size);                                    //cambiar pedido
-int pedido_buscarEmpty(Pedido array[], int size);                    //cambiar pedido
-int pedido_buscarById(Pedido array[], int id, int size);
-int pedido_alta(Pedido arrayP[], int sizeP,int id, Cliente arrayC[],int sizeC);
-int pedido_printPendiente(Pedido arrayP[], int posicion, int sizeP,Cliente arrayC[],int sizeC);
-void pedido_listarPendiente(Pedido arrayP[],int sizeP, Cliente arrayC[], int sizeC);
-int residuo_procesar(Pedido arrayP[], int sizeP, Cliente arrayC[],int sizeC);
-int pedido_printProcesado(Pedido arrayP[],int sizeP, int posicion,Cliente arrayC[], int sizeC);
-void pedido_listaProcesado(Pedido arrayP[],int sizeP, Cliente arrayC[],int sizeC);
-int pedido_cantidadPorCliente(Pedido arrayP[], int sizeP, Cliente* arrayC[], int indexCliente);
-int pedido_printCliente(Pedido* arrayP[], int sizeP, Cliente* arrayC[], int indexCliente, int sizeC);
-void pedido_listarCliente(Pedido* arrayP[], int sizeP, Cliente* arrayC[], int sizeC);
-
-
-
-#endif // PEDIDOS_H_INCLUDED
+#endif /* PEDIDOS_H_ */

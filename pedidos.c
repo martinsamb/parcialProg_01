@@ -1,299 +1,401 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "utn.h"
-#include "pedidos.h" //cambiar por nombre entidad
-#include "clientes.h"
+#include "pedidos.h"
 
 
-/** \brief  To indicate that all position in the array are empty,
-*          this function put the flag (isEmpty) in TRUE in all
-*          position of the array
-* \param array pedido Array of pedido
-* \param size int Array length
-* \return int Return (-1) if Error [Invalid length or NULL pointer] - (0) if Ok
+#define CANTIDAD_CLIENTES 100
+#define CANTIDAD_PEDIDOS 1000
+
+/** \brief inicializa los pedidos con isEmpty en 0
+* \param list pedidos[]
+* \param int cantidad
+*
+* \return int Return (-1) if Error [Invalid length or NULL pointer or without
+free space] - (0) if Ok
 *
 */
-int pedido_Inicializar(Pedido array[], int size)                                    //cambiar pedido
+int pedido_Inicializar(Pedido pedidos[], int cantidad)
 {
-    int retorno=-1;
-    if(array!= NULL && size>0)
-    {
-        for(;size>0;size--)
-        {
-            array[size-1].isEmpty=1;
-        }
-        retorno=0;
-    }
-    return retorno;
+	int i;
+	if(pedidos != NULL && cantidad > 0)
+	{
+		for (i = 0; i < cantidad; i++)
+		{
+			pedidos[i].isEmpty = 0;
+		}
+	}
+	return 0;
 }
-
-//*****************************************
-//Buscar
-//Int
-/** \brief Busca el primer lugar vacio en un array
-* \param array pedido Array de pedido
-* \param size int Tamaño del array
-* \param posicion int* Puntero a la posicion del array donde se encuentra el valor buscado
-* \return int Return (-1) si no encuentra un lugar vacio o Error [Invalid length or NULL pointer] - (0) si encuentra una posicion vacia
+/** \brief busca la posicion de pedido con isEmpty en 0
+* \param list pedidos[]
+* \param int cantidad
+*
+* \return int retorna la posicion del pedido o (-1) if Error [Invalid length or NULL pointer or without free space]
 *
 */
-int pedido_buscarEmpty(Pedido array[], int size)                    //cambiar pedido
+int pedido_buscarEmpty(Pedido pedidos[], int cantidad)
 {
-    int retorno=-1;
-    int posicion;
-    if(array!=NULL && size>0)
-    {
-        for(posicion=0;posicion<size;posicion++)
-        {
-            if(array[posicion].isEmpty==1)
-            {
-                retorno = posicion;
-                break;
-            }
-        }
-    }
-    return retorno;
+	int retorno = -1;
+	int i;
+	if(pedidos != NULL && cantidad > 0)
+	{
+		if(pedidos != NULL && cantidad > 0)
+		{
+			for (i = 0; i < cantidad; i++)
+			{
+				if (pedidos[i].isEmpty == 0)
+				{
+					return i;
+				}
+			}
+		}
+	}
+	return retorno;
 }
 
-/** \brief Busca un ID en un array y devuelve la posicion en que se encuentra
-* \param array pedido Array de pedido
-* \param size int Tamaño del array
-* \param posicion int* Puntero a la posicion del array donde se encuentra el valor buscado
-* \return int Return (-1) si no encuentra el valor buscado o Error [Invalid length or NULL pointer] - (0) si encuentra el valor buscado
+/** \brief lista los pedidos pendientes
+* \param list pedidos[]
+* \param int cantidad
+*
+* \return int Return (-1) if Error [Invalid length or NULL pointer or without free space] - (0) if Ok
 *
 */
-int pedido_buscarById(Pedido array[], int id, int size)
+int pedido_listarPendientes(Pedido pedidos[], int cantidad)
 {
-    int i;
-    int retorno=-1;
-    for(i=0; i<size; i++)
-    {
-        if(array[i].isEmpty==0 && array[i].idUnico==id)
-        {
-            retorno=i;
-            break;
-        }
-    }
-    if(retorno==-1)
-    {
-        printf("No se encontro el ID\n");
-    }
-    return retorno;
+	int retorno = -1;
+	int i;
+	int flag = 0;
+	if(pedidos != NULL && cantidad > 0)
+	{
+		for (i = 0; i < cantidad; i++)
+		{
+			if (pedidos[i].isEmpty == 1 && pedidos[i].estado == 0)
+			{
+				printf("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n"
+						"ID pedido: %d\n"
+						"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n",
+						pedidos[i].idPedido);
+				retorno = 0;
+				flag = 1;
+			}
+		}
+			if(flag == 0)
+			{
+				printf("No hay pedidos a listar.\n");
+			}
+	}
+	return retorno;
 }
 
-//*****************************************
-//Alta
-/** \brief Solicita los datos para completar la primer posicion vacia de un array
-* \param array pedido Array de pedido
-* \param size int Tamaño del array
-* \param contadorID int* Puntero al ID unico que se va a asignar al nuevo elemento
-* \return int Return (-1) si Error [largo no valido o NULL pointer o no hay posiciones vacias] - (0) si se agrega un nuevo elemento exitosamente
+/** \brief da de alta un pedido
+* \param list clientes[]
+* \param int index
+* \param int idPedido
+* \param int idCliente
+*
+* \return int Return (-1) if Error [Invalid length or NULL pointer or without
+free space] - (0) if Ok
 *
 */
-int pedido_alta(Pedido arrayP[], int sizeP,int id, Cliente arrayC[],int sizeC)
+int pedido_alta(Pedido pedidos[],int index, int idPedido, int idCliente)
 {
-    int retorno = -1;
-    int posicion;
-    int idCliente;
-    Pedido auxPedido;
-    posicion = pedido_buscarEmpty(arrayP, sizeP);
-    if(arrayP!= NULL && posicion>=0 && posicion<sizeP);
-    {
-        cliente_listar(arrayC,sizeC);
-        utn_getUnsignedInt("\nIngrese ID de cliente: ","\nError",1,sizeof(int),1,3,2,&idCliente);
-        if(cliente_buscarById(arrayC,idCliente,TEXT_CLIENT)==-1 &&
-           utn_getUnsignedInt("\nIngrese Cantidad de residuos en kilos: ","\nError",3,0,5000,1,3,&auxPedido[posicion].kilos)==0)
-        {
-            arrayP[posicion]=auxPedido;
-            arrayP[posicion].idUnico = id;
-            arrayP[posicion].idCliente = idCliente;
-            arrayP[posicion].estado = PENDIENTE;
-            arrayP[posicion].isEmpty = 0;
-            retorno = 0;
-        }
-        else
-        {
-            printf("\nNo hay mas espacio para guardar clientes");
-        }
-        return retorno;
-    }
+	int retorno = -1;
+	int auxiliar = 0;
+	pedidos[index].kilosRetirados = 0;
+	if(pedidos != NULL)
+	{
+		if (utn_getNumber(&auxiliar,2000,50,2,"Ingrese Cantidad de kilos a retirar, sin coma, entre 50-2000:\n",
+													"Fuera de rango valido\n")== 0)
+		{
+			pedidos[index].kilosRetirados = auxiliar;
+		}
 
+		if (pedidos[index].kilosRetirados != 0)
+		{
+			pedidos[index].isEmpty = 1;
+			pedidos[index].idPedido = idPedido;
+			pedidos[index].estado = 0;
+			pedidos[index].idCliente = idCliente;
+			retorno = 0;
+		}else
+		{
+			printf("No se puedo dar de alta el pedido.\n");
+		}
+	}
+	return retorno;
 }
-//*****************************************
 
-//Listar
-/** \brief Lista los elementos de un array
-* \param array pedido Array de pedido
-* \param size int Tamaño del array
-* \return int Return (-1) si Error [largo no valido o NULL pointer] - (0) si se lista exitosamente
+/** \brief busca pedido por Id pedido
+* \param list clientes[]
+* \param int idPedido
+* \param int* pUbicacionPedido
+*
+* \return int Return (-1) if Error [Invalid length or NULL pointer or without
+free space] - (0) if Ok
 *
 */
-
-int pedido_printPendiente(Pedido arrayP[], int posicion, int sizeP,Cliente arrayC[],int sizeC)
+int pedido_buscarPorId(Pedido pedidos[], int idPedido,int *pUbicacionPedido)
 {
-    int retorno =-1;
-    int indexCliente;
-    indexCliente = cliente_buscarById(arrayC,arrayP[posicion].idCliente,sizeC);
-    if(arrayP!=NULL && posicion<sizeP)
-    {
-        printf("%d\t%d\t%s\t\%d\n",arrayP[posicion].idUnico,arrayC[indexCliente].cuit,arrayC[indexCliente].direccion,arrayP[posicion].kilos);
-        retorno = 0;
-    }
-    else
-    {
-        printf("Error al imprimir los datos del pedido\n");
-    }
-    return retorno;
+	int retorno = -1;
+	int i;
+	if(pedidos != NULL)
+	{
+		for (i = 0; i != idPedido; i++)
+		{
+			if (pedidos[i].idPedido == idPedido)
+			{
+				*pUbicacionPedido = i;
+				retorno = 0;
+			}
+		}
+	}
+	return retorno;
 }
 
-void pedido_listarPendiente(Pedido arrayP[],int sizeP, Cliente arrayC[], int sizeC)
+/** \brief procesa los residuos de un pedido pendiente
+* \param list pedidos[]
+*
+* \return int Return (-1) if Error [Invalid length or NULL pointer or without free space] - (0) if Ok
+*
+*/
+int pedido_procesarResiduos(Pedido pedidos[])
 {
-    int i;
-    printf("\n\nID\tCuit\tDireccion\tKilos\n");
-    for(i=0; i<sizeP; i++)
-    {
-        if(arrayP[i].isEmpty ==0 && arrayP[i].estado==PENDIENTE)
-        {
-            pedido_printPendiente(arrayP,i,sizeP,arrayC,sizeC);
-        }
-    }
+	int retorno = -1;
+	int index = 0;
+	int idPedido;
+	int auxHPDE;
+	int auxLDPE;
+	int auxPP;
+	int auxKilosRetirados;
+	int flag = 0;
+
+	if(pedidos != NULL)
+	{
+		if(pedido_buscarPendiente(pedidos, CANTIDAD_PEDIDOS,&idPedido)==0)
+		{
+			pedido_buscarPorId(pedidos,idPedido,&index);
+			auxKilosRetirados = pedidos[index].kilosRetirados;
+			printf("La cantidad de kilos para procesar en este pedido es: %d\n", pedidos[index].kilosRetirados);
+			utn_getNumber(&auxHPDE,auxKilosRetirados,0,2,"Cuantos kilos se procesan como HPDE?\n","Ingreso Invalido.\n");
+			if(auxHPDE > auxKilosRetirados)
+			{
+				printf("No podemos procesar mas que lo que tenemos.\n");
+				flag = 1;
+			}else if(auxHPDE < 0)
+			{
+				printf("No puede ser menor a cero.\n");
+				flag = 1;
+			}else
+			{
+				pedidos[index].kilosHDPE = auxHPDE;
+				auxKilosRetirados = auxKilosRetirados - auxHPDE;
+				printf("Quedan %d kilos para seguir procesando.\n", auxKilosRetirados);
+			}
+			if(auxKilosRetirados != 0)
+			{
+			utn_getNumber(&auxLDPE,auxKilosRetirados,0,2,"Cuantos kilos se procesan como LDPE?.\n","Ingreso Invalido.\n");
+			if(auxLDPE > auxKilosRetirados)
+			{
+				printf("No podemos procesar mas que lo que tenemos.\n");
+				flag = 1;
+			}else if(auxLDPE < 0)
+			{
+				printf("No puede ser menor a cero.\n");
+				flag = 1;
+			}else
+			{
+				pedidos[index].kilosLDPE = auxLDPE;
+				auxKilosRetirados = auxKilosRetirados - auxLDPE;
+				printf("Quedan %d kilos para seguir procesando.\n", auxKilosRetirados);
+			}
+			}
+			if(auxKilosRetirados != 0)
+			{
+			utn_getNumber(&auxPP,auxKilosRetirados,0,2,"Cuantos kilos se procesan como PP?\n","Ingreso Invalido.\n");
+			if(auxPP > auxKilosRetirados)
+			{
+				printf("No podemos procesar mas que lo que tenemos.\n");
+				flag = 1;
+			}else if(auxPP < 0)
+			{
+				printf("No puede ser menor a cero.\n");
+				flag = 1;
+			}else
+			{
+				pedidos[index].kilosPP = auxPP;
+				auxKilosRetirados = auxKilosRetirados - auxPP;
+			}
+			}
+				printf("Se desecharan %d kilos.\n", auxKilosRetirados);
+			if(flag==0)
+			{
+				pedidos[index].estado = 1;
+				retorno = 0;
+			}
+		}else
+		{
+			printf("No existe ese numero de pedido.\n");
+		}
+	}
+	return retorno;
 }
 
-int residuo_procesar(Pedido arrayP[], int sizeP, Cliente arrayC[],int sizeC)
-{
-    int retorno =-1;
-    int idPedido;
-    int indexPedido;
-    float hdpeKilos;
-    float ldpeKilos;
-    float ppKilos;
-    float kilosMaximo;
-
-    pedido_listarPendiente(arrayP,sizeP,arrayC,sizeC);
-    if(utn_getUnsignedInt("\nIngrese ID de Pedido: ","\nError",3,0,2000,3,1,&idPedido)==0)
-    {
-        indexPedido = pedido_buscarById(arrayP,idPedido,sizeP);
-        if(indexPedido != -1)
-        {
-            kilosMaximo = arrayP[indexPedido].kilos;
-            if(utn_getFloat("\nIngrese la cantidad de HDPE en Kilos: ", "\nError", 3,kilosMaximo,1,5,1,&hdpeKilos)==0)
-            {
-                kilosMaximo = kilosMaximo-hdpeKilos;
-            }
-            if(utn_getFloat("\nIngrese la cantidad de LDPE en Kilos: ", "\nError", 3,kilosMaximo,1,5,1,&ldpeKilos)==0)
-            {
-                kilosMaximo = kilosMaximo-ldpeKilos;
-            }
-            if(utn_getFloat("\nIngrese la cantidad de PP en Kilos: ", "\nError", 3,kilosMaximo,1,5,1,&ppKilos)==0)
-            {
-                kilosMaximo=kilosMaximo-ppKilos;
-            }
-            if(kilosMaximo<0)
-            {
-                printf("\nNo puede haber basura en negativo");
-            }
-            else
-            {
-                arrayP[indexPedido].hdpe = hdpeKilos;
-                arrayP[indexPedido].ldpe = ldpeKilos;
-                arrayP[indexPedido].pp = ppKilos;
-                arrayP[indexPedido].estado = COMPLETADO;
-                retorno = 0;
-            }
-        }
-    }
-    return retorno;
-}
-
-int pedido_printProcesado(Pedido arrayP[],int sizeP, int posicion,Cliente arrayC[], int sizeC)
-{
-    int retorno=-1;
-    int indexCliente;
-
-    indexCliente = cliente_buscarById(arrayC,arrayP[posicion].idCliente,sizeC);
-    if(arrayP!=NULL && posicion<sizeP)
-    {
-        printf("%d   %s%18s     %.2f\t  %7.2f%10.2f\n",arrayP[posicion].idUnico,arrayC[indexCliente].cuit,arrayC[indexCliente].direccion,arrayP[posicion].hdpe,arrayP[posicion].ldpe,arrayP[posicion].pp);
-        retorno = 0;
-    }
-    else
-    {
-        printf("Error al imprimir los datos del pedido\n");
-    }
-    return retorno;
-}
-
-void pedido_listaProcesado(Pedido arrayP[],int sizeP, Cliente arrayC[],int sizeC)
-{
-    int i;
-    printf("\n\nId\tCuit\t\tDireccion\tHDPE\t   LDPE\t      PP\n");
-    printf("--\t----\t\t---------\t----\t   ----\t      --\n");
-    for(i=0;i<sizeP;i++)
-    {
-        if(arrayP[i].isEmpty==0 && arrayP[i].estado==COMPLETADO)
-        {
-            pedido_printProcesado(arrayP,i,sizeP,arrayC,sizeC);
-        }
-    }
-}
-
-int pedido_cantidadPorCliente(Pedido arrayP[], int sizeP, Cliente* arrayC[], int indexCliente)
-{
-    int retorno = -1;
-    int i;
-    int cantidadPedidos = 0;
-
-    for(i=0; i<sizeP; i++)
-    {
-        if(arrayP[i].idCliente==arrayC[indexCliente].id && arrayP[i].estado==PENDIENTE && arrayP[i].isEmpty == 0)
-        {
-            cantidadPedidos++;
-        }
-    }
-
-    retorno = cantidadPedidos;
-
-    return retorno;
-}
-
-int pedido_printCliente(Pedido arrayP[], int sizeP, Cliente arrayC[], int indexCliente, int sizeC)
-{
-    int retorno=-1;
-    int cantidadDePedidos;
-
-    cantidadDePedidos = pedido_cantidadPorCliente(arrayP,sizeP, arrayC, indexCliente);
-    if(arrayC!=NULL && indexCliente<sizeC)
-    {
-        printf("%d      %-14s%10s  \t%s  \t%10s   \t%d\n", arrayC[indexCliente].idUnico, arrayC[indexCliente].nombreEmpresa, arrayC[indexCliente].cuit, arrayC[indexCliente].direccion, arrayC[indexCliente].localidad, cantidadDePedidos);
-        retorno=0;
-    }
-    else
-    {
-        printf("Error al imprimir los datos del Cliente \n");
-    }
-    return retorno;
-}
-
-void pedido_listarCliente(Pedido* arrayP[], int sizeP, Cliente* arrayC[], int sizeC)
+/** \brief ordena los pedidos por idCliente
+* \param list clientes[]
+* \param int cantidad
+*
+* \return void
+*
+*/
+void pedido_ordenarPorId(Pedido pedidos[],  int cantidad)
 {
     int i;
-
-    printf("\n\nId\tNombre\t\tCuit\t\tDireccion\tLocalidad\tPedidos\n");
-    printf("--\t------\t\t----\t\t---------\t---------\t-------\n");
-    for(i=0;i<sizeC;i++)
+    Pedido auxiliarPedido;
+    int s = 1;
+    if(pedidos != NULL && cantidad > 0)
     {
-        if(arrayC[i].isEmpty==0)
-        {
-            pedido_printCliente(arrayP,sizeP,arrayC,i,sizeC);
-        }
+		while(s)
+		{
+			s = 0;
+			for (i = 1; i < cantidad; i++)
+			{
+				if (pedidos[i].idCliente < pedidos[i - 1].idCliente)
+				{
+					auxiliarPedido = pedidos[i];
+					pedidos[i] = pedidos[i - 1];
+					pedidos[i - 1] = auxiliarPedido;
+					s = 1;
+				}
+			}
+		}
     }
 }
 
+/** \brief cuenta la cantidad de pedidos en estado pendiente
+* \param list pedidos[]
+* \param int idCliente
+* \param int* cantidadPendientes
+*
+* \return void
+*
+*/
+void pedido_contadorPendientes(Pedido pedidos[], int idCliente, int* cantidadPendientes)
+{
+	int i;
+	int contadorPendientes = 0;
+	if(pedidos != NULL)
+	{
+		for (i = 0; i < CANTIDAD_PEDIDOS; i++)
+		{
+			if (idCliente == pedidos[i].idCliente && pedidos[i].estado == 0)
+			{
+				contadorPendientes++;
+			}
+		}
+		*cantidadPendientes = contadorPendientes;
+	}
 
+}
 
+/** \brief cuenta la cantidad de pedidos en estado procesado
+* \param list pedidos[]
+* \param int idCliente
+* \param int* cantidadProcesado
+*
+* \return void
+*
+*/
+void pedido_contadorProcesado(Pedido pedidos[], int idCliente, int* cantidadProcesado)
+{
+	int i;
+	int contadorProcesado = 0;
+	if(pedidos != NULL)
+	{
+		for (i = 0; i < CANTIDAD_PEDIDOS; i++)
+		{
+			if (idCliente == pedidos[i].idCliente && pedidos[i].estado == 1)
+			{
+				contadorProcesado++;
+			}
+		}
+		*cantidadProcesado = contadorProcesado;
+	}
 
+}
 
+/** \brief cuenta la cantidad de pedidos
+* \param list pedidos[]
+* \param int idCliente
+* \param int* cantidadProcesado
+*
+* \return void
+*
+*/
+void pedido_contador(Pedido pedidos[], int idCliente, int* cantidadProcesado)
+{
+	int i;
+	int contadorProcesado = 0;
+	if(pedidos != NULL)
+	{
+		for (i = 0; i < CANTIDAD_PEDIDOS; i++)
+		{
+			if (idCliente == pedidos[i].idCliente)
+			{
+				contadorProcesado++;
+			}
+		}
+		*cantidadProcesado = contadorProcesado;
+	}
 
+}
+/** \brief busca si el id de pedido existe
+* \param list pedidos[]
+* \param int cantidad
+* \param int* idParaProcesar
+*
+* \return int Return (-1) if Error [Invalid length or NULL pointer or withoutfree space] - (0) if Ok
+*
+*/
+int pedido_buscarPendiente(Pedido pedidos[], int cantidad, int* idParaProcesar)
+{
+	int retorno = -1;
+	int i;
+	int auxiliarIdPedido;
+	if(pedidos != NULL && cantidad > 0)
+	{
+		if (utn_getNumber(&auxiliarIdPedido,2000,100,2,"Ingrese id del pedido:\n","Id no fue ingresado correctamente\n")== 0)
+			{
+				for (i = 0; i < cantidad; i++)
+				{
+					if (pedidos[i].idPedido == auxiliarIdPedido)
+					{
+						*idParaProcesar = auxiliarIdPedido;
+						retorno = 0;
+					}
+				}
+			}
+	}
+	return retorno;
+}
 
+void pedido_contadorKilosProcesados(Pedido pedidos[], int idCliente, int* kilosProcesado)
+{
+	int i;
+	int contadorKilosProcesado = 0;
+	if(pedidos != NULL)
+	{
+		for (i = 0; i < CANTIDAD_PEDIDOS; i++)
+		{
+			if (idCliente == pedidos[i].idCliente)
+			{
+				contadorKilosProcesado += (pedidos[i].kilosHDPE + pedidos[i].kilosLDPE + pedidos[i].kilosPP);
+			}
+		}
+		*kilosProcesado = contadorKilosProcesado;
+	}
 
+}
