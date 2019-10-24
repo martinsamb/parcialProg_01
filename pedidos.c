@@ -75,9 +75,9 @@ int pedido_listarPendientes(Pedido pedidos[], int cantidad)
 		{
 			if (pedidos[i].isEmpty == 1 && pedidos[i].estado == 0)
 			{
-				printf("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n"
+				printf("-----------------------------\n"
 						"ID pedido: %d\n"
-						"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n",
+						"-----------------------------\n",
 						pedidos[i].idPedido);
 				retorno = 0;
 				flag = 1;

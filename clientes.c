@@ -100,16 +100,7 @@ int cliente_alta(Cliente clientes[], int index,int idCliente)
 					flag = 1;
 				}
 			}
-		/*if (flag == 0)
-		{
-			if (utn_getNumber(&auxiliar,12000,1,2,"Ingrese la altura de la calle:\n","Altura no valida")== 0)
-			{
-				clientes[index].altura = auxiliar;
-			} else
-			{
-				flag = 1;
-			}
-		}*/
+
 		if (flag == 0)
 			{
 				if (utn_getString("Ingrese la localidad de la empresa: \n", "Calle no valido.\n", buffer)== 0)

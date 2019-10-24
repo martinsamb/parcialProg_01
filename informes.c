@@ -157,11 +157,11 @@ int listar_pedidosCompletos(Pedido pedidos[], Cliente clientes[])
 						indexCliente = j;
 					}
 				}
-				printf("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n"
+				printf("--------------------------\n"
 				"CUIT: %s\nLa direccion es: %s %d\n"
 				"La cantidad de HDPE procesado es: %d\n""La cantidad de LDPE procesado es: %d\n"
 				"La cantidad de PP procesado es: %d\n"
-				"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n",
+				"----------------------------------\n",
 				clientes[indexCliente].cuitCliente,
 				clientes[indexCliente].direccion,
 				pedidos[i].kilosHDPE,
@@ -208,7 +208,7 @@ int listar_cantidadPedidosPendientes(Pedido pedidos[], Cliente clientes[])
 				indexCliente = cliente_buscarPorId(clientes,auxiliar);
 				if(control != auxiliar)
 				{
-				printf("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n"
+				printf("---------------------------\n"
 			    "El nombre es: %s\n""El CUIT es: %s\n"
 			    "La direccion es: %s %d\nLa localidad es %s.\nEl id es: %d.\n"
 			    "La cantidad de pedidos pendientes es: %d\n"
