@@ -19,6 +19,7 @@ int menu_Informes(Pedido pedidos[], Cliente clientes[])
 	int opcion = 0;
 	do {                fflush(stdin);
 						//__fpurge(stdin);
+						printf("-- Menu Informes --\n")
 						printf("1) Cliente con mas pedidos pendientes\n");
 						printf("2) Cliente con mas pedidos procesados\n");
 						printf("3) Cliente con mas pedidos\n");
@@ -33,29 +34,38 @@ int menu_Informes(Pedido pedidos[], Cliente clientes[])
 						printf("12)VOLVER AL MENU PRINCIPAL\n");
 						utn_getInt(&opcion);
 						switch (opcion) {
-						case 1:pedido_ordenarPorId(pedidos,CANTIDAD_PEDIDOS);
+						case 1:
+						    pedido_ordenarPorId(pedidos,CANTIDAD_PEDIDOS);
 							cliente_conMasPedidosPendientes(pedidos,clientes);
 							break;
-						case 2:pedido_ordenarPorId(pedidos,CANTIDAD_PEDIDOS);
+						case 2:
+						    pedido_ordenarPorId(pedidos,CANTIDAD_PEDIDOS);
 							cliente_conMasPedidosCompletados(pedidos,clientes);
 							break;
-						case 3:cliente_conMasPedidos(pedidos,clientes);
+						case 3:
+						    cliente_conMasPedidos(pedidos,clientes);
 							break;
-						case 4:pedido_ordenarPorId(pedidos,CANTIDAD_PEDIDOS);
-							   listar_clienteQueMasReciclo(pedidos,clientes);
+						case 4:
+						    pedido_ordenarPorId(pedidos,CANTIDAD_PEDIDOS);
+                            listar_clienteQueMasReciclo(pedidos,clientes);
 							break;
-						case 5:pedido_ordenarPorId(pedidos,CANTIDAD_PEDIDOS);
-						   	   listar_clienteQueMenosReciclo(pedidos,clientes);
+						case 5:
+						    pedido_ordenarPorId(pedidos,CANTIDAD_PEDIDOS);
+                            listar_clienteQueMenosReciclo(pedidos,clientes);
 							break;
-						case 6:clientes_conMasDeMilKilosProcesados(pedidos,clientes);
+						case 6:
+						    clientes_conMasDeMilKilosProcesados(pedidos,clientes);
 							break;
 						case 7:clientes_conMenosDeCienKilosProcesados(pedidos,clientes);
 							break;
-						case 8:listar_pedidosCompletosConInformacion(pedidos,clientes);
+						case 8:
+						    listar_pedidosCompletosConInformacion(pedidos,clientes);
 							break;
-						case 9:listar_pedidosPendientesPorLocalidad(pedidos,clientes);
+						case 9:
+						    listar_pedidosPendientesPorLocalidad(pedidos,clientes);
 							break;
-						case 10:cantidad_deKilosPPProcesadoPorCliente(pedidos,clientes);
+						case 10:
+						    cantidad_deKilosPPProcesadoPorCliente(pedidos,clientes);
 							break;
 						case 11:cantidad_deKilosProcesadosAEleccion(pedidos,clientes);
 							break;
@@ -559,10 +569,10 @@ int listar_pedidosPendientesPorLocalidad(Pedido pedidos[], Cliente clientes[])
 	{
 		if(utn_getString("Ingrese la localidad: \n", "Localidad no valida.\n", buffer)==0)
 		{
-			for (int indice = 0; buffer[indice] != '\0'; indice++)
+			/*for (int indice = 0; buffer[indice] != '\0'; indice++)
 			{
 				buffer[indice] = toupper(buffer[indice]);
-			}
+			}*/
 
 			for (i = 0; i < CANTIDAD_CLIENTES; i++)
 			{

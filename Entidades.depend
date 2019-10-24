@@ -285,3 +285,58 @@
 	"pedidos.h"
 	"informes.h"
 
+1571956004 source:d:\mis documentos\martinsamb\parcialprog_01\clientes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"clientes.h"
+
+1571956004 d:\mis documentos\martinsamb\parcialprog_01\utn.h
+
+1571956004 d:\mis documentos\martinsamb\parcialprog_01\clientes.h
+
+1571957195 source:d:\mis documentos\martinsamb\parcialprog_01\informes.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"utn.h"
+	"clientes.h"
+	"pedidos.h"
+	"informes.h"
+
+1571956004 d:\mis documentos\martinsamb\parcialprog_01\pedidos.h
+
+1571956004 d:\mis documentos\martinsamb\parcialprog_01\informes.h
+
+1571957242 source:d:\mis documentos\martinsamb\parcialprog_01\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"clientes.h"
+	"pedidos.h"
+	"informes.h"
+
+1571956004 source:d:\mis documentos\martinsamb\parcialprog_01\pedidos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"pedidos.h"
+
+1571956004 source:d:\mis documentos\martinsamb\parcialprog_01\utn.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+

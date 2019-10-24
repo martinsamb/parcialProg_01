@@ -43,16 +43,17 @@ int main(void) {
 	do {
                     fflush(stdin);
 					//__fpurge(stdin);
-					printf("1) ALTA CLIENTE\n");
-					printf("2) MODIFICAR DATOS DE CLIENTE\n");
-					printf("3) BAJA DE CLIENTE\n");
-					printf("4) CREAR PEDIDO DE RECOLECCION\n");
-					printf("5) PROCESAR RESIDUOS\n");
-					printf("6) IMPRIMIR CLIENTES\n");
-					printf("7) IMPRIMIR PEDIDOS PENDIENTES\n");
-					printf("8) IMPRIMIR PEDIDOS PROCESADOS\n");
-					printf("9) INFORMES\n");
-					printf("10) SALIR\n");
+					printf(" -- Menu Principal --\n");
+					printf("1) Alta cliente\n");
+					printf("2) Modificar cliente\n");
+					printf("3) Baja cliente\n");
+					printf("4) Pedidode recoleccion\n");
+					printf("5) Procesar residuos\n");
+					printf("6) Imprimir clientes\n");
+					printf("7) Imprimie pedidos pendientes\n");
+					printf("8) Imprimir pedidos procesados\n");
+					printf("9) Informes\n");
+					printf("10) Salir\n");
 					utn_getInt(&opcion);
 					switch (opcion) {
 					case 1:
